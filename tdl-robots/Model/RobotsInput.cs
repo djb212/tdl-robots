@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace tdl_robots.Model
+﻿namespace tdl_robots.Model
 {
     internal class RobotsInput
     {
