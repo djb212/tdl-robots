@@ -18,3 +18,6 @@ The output will be written to the console, and again will be in the format liste
 
 ## Use of AI
 The code itself was mostly written by hand, although I did ask Copilot for the best way to accomplish some tasks, as well as setting up the config for the main project to be visible to the unit tests. Copilot auto-complete was used for some of the more repetitive parts of the code, as well as the comments for documentation.
+
+## Other comments
+Obviously reading input from a text file within the codebase is not good practice and was done here for convenience. In real life, it would be much better to set up an app.config file where the input URI can be configured and read from that, or even set up a front-end where the file could be uploaded.
