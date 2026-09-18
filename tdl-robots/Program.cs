@@ -4,11 +4,15 @@ using tdl_robots.Services;
 
 try
 {
-    InputParser parser = new InputParser();
+    // Read and parse the input file
+    InputParser parser = new();
     RobotsInput input = parser.ParseInput("input.txt");
 
-    ProcessRobots processor = new ProcessRobots(input);
+    // Process the robots and get the output
+    ProcessRobots processor = new(input);
     string[] output = processor.Run();
+
+    // Print the output to the console
     foreach (string line in output)
     {
         Console.WriteLine(line);

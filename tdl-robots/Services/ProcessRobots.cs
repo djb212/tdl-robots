@@ -4,29 +4,47 @@ namespace tdl_robots.Services
 {
     internal class ProcessRobots
     {
-        private readonly int xBound;
-        private readonly int yBound;
-        private readonly List<Robot> robots;
-        private HashSet<int> lostPositions;
+        /// <summary>
+        /// Parsed input object containing the grid bounds and list of robots with their starting positions and instructions.
+        /// </summary>
+        private RobotsInput input;
 
+        /// <summary>
+        /// Set of positions where robots have been lost, to prevent future robots from being lost at the same position.
+        /// As we're only interested in checking if a robot has been lost at a position, a hashset is more efficient than a list.
+        /// </summary>
+        private HashSet<string> lostPositions;
+
+        /// <summary>
+        /// Constructor for class
+        /// </summary>
+        /// <param name="robotsInput">RobotsInput object</param>
         internal ProcessRobots(RobotsInput robotsInput)
         {
-            xBound = robotsInput.xBound;
-            yBound = robotsInput.yBound;
-            robots = robotsInput.robots;
-            lostPositions = new HashSet<int>();
+            input = robotsInput;
+            lostPositions = new HashSet<string>();
         }
 
+        /// <summary>
+        /// Processes the robots in the input, following their instructions and returning their final positions and lost status.
+        /// </summary>
+        /// <returns>Array of strings with the final position of each robot</returns>
         internal string[] Run()
         {
-            string[] output = new string[robots.Count];
-            for (int i = 0; i < robots.Count; i++)
+            string[] output = new string[input.robots.Count];
+            for (int i = 0; i < input.robots.Count; i++)
             {
-                output[i] = ProcessRobot(robots[i]);
+                output[i] = ProcessRobot(input.robots[i]);
             }
             return output;
         }
 
+        /// <summary>
+        /// Processes a single robot's instructions, updating its position and checking for lost status.
+        /// </summary>
+        /// <param name="robot">Robot object with location and instructions</param>
+        /// <returns>String representing final position and, if applicable, lost status</returns>
+        /// <exception cref="FormatException"></exception>
         internal string ProcessRobot(Robot robot)
         {
             Position position = robot.position;
@@ -65,10 +83,10 @@ namespace tdl_robots.Services
                         }
 
                         // Check if out of bounds
-                        if (x < 0 || x > xBound || y < 0 || y > yBound)
+                        if (x < 0 || x > input.xBound || y < 0 || y > input.yBound)
                         {
                             // Check if we've already lost a robot here
-                            if (lostPositions.Contains(10000 * position.x + position.y))
+                            if (lostPositions.Contains(position.x + "," + position.y))
                             {
                                 // Continue to next instruction
                                 continue;
@@ -77,7 +95,7 @@ namespace tdl_robots.Services
                             {
                                 // Robot is lost
                                 isLost = true;
-                                lostPositions.Add(10000 * position.x + position.y);
+                                lostPositions.Add(position.x + "," + position.y);
                             }
                         }
                         else

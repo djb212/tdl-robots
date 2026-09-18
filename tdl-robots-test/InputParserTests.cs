@@ -17,6 +17,9 @@ namespace tdl_robots_test
             inputParser = new InputParser();
         }
 
+        /// <summary>
+        /// Tests for valid input parsing and checks if the returned RobotsInput object has the expected values.
+        /// </summary>
         [Test]
         public void Given_ValidInput_ParseInput_Returns_CorrectResult()
         {
@@ -34,6 +37,11 @@ namespace tdl_robots_test
             Assert.That(result.robots[2].position.direction, Is.EqualTo(3));
         }
 
+        /// <summary>
+        /// Tests for invalid input parsing and checks if the appropriate exceptions are thrown for various error scenarios.
+        /// </summary>
+        /// <param name="file">Filepath for file to be tested</param>
+        /// <param name="exceptionType">Expected exception</param>
         [TestCase("input/doesnotexist.txt", typeof(FileNotFoundException))]
         [TestCase("input/boundstoobig.txt", typeof(ArgumentOutOfRangeException))]
         [TestCase("input/startoutofbounds.txt", typeof(ArgumentOutOfRangeException))]

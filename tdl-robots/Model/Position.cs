@@ -11,11 +11,17 @@
             this.y = y;
             this.direction = direction;
         }
-        // Current x co-ordinate
+        /// <summary>
+        /// Current x co-ordinate
+        /// </summary>
         internal int x;
-        // Current y co-ordinate
+        /// <summary>
+        /// Current y co-ordinate
+        /// </summary>
         internal int y;
-        // Current direction, where 0 = N, 1 = E, 2 = S, 3 = W
+        /// <summary>
+        /// Current direction, where 0 = N, 1 = E, 2 = S, 3 = W
+        /// </summary>
         internal int direction;
     }
 }

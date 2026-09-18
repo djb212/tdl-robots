@@ -2,11 +2,28 @@
 
 namespace tdl_robots.Data
 {
+    /// <summary>
+    /// Reads and parses the input file, validating the data and returning a RobotsInput object.
+    /// </summary>
     internal class InputParser
     {
+        /// <summary>
+        /// X bound of the grid
+        /// </summary>
         int xBound;
+
+        /// <summary>
+        /// Y bound of the grid
+        /// </summary>
         int yBound;
 
+        /// <summary>
+        /// Parses the input file and returns a RobotsInput object containing the grid bounds and a list of robots with their starting positions and instructions.
+        /// </summary>
+        /// <param name="inputFile">URI of the input file to be read</param>
+        /// <returns>Formatted RobotsInput object containing the input data</returns>
+        /// <exception cref="FileNotFoundException"></exception>
+        /// <exception cref="FormatException"></exception>
         internal RobotsInput ParseInput(string inputFile)
         {
             // Read the file
@@ -45,6 +62,12 @@ namespace tdl_robots.Data
             return robotsInput;
         }
 
+        /// <summary>
+        /// Parses the bounds from the first line of the input file and validates them.
+        /// </summary>
+        /// <param name="boundsString">First line of the input file containing the bounds</param>
+        /// <exception cref="FormatException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void GetBounds(string boundsString)
         {
             string[] bounds = boundsString.Trim().Split();
@@ -64,6 +87,14 @@ namespace tdl_robots.Data
             }
         }
 
+        /// <summary>
+        /// Parses a robot's starting position and instructions from the input file and validates them.
+        /// </summary>
+        /// <param name="positionString">First line of the robot's description, containing its starting position and direction</param>
+        /// <param name="instructionString">Second line of the robot's description, containing its movement instructions</param>
+        /// <returns>Robot object</returns>
+        /// <exception cref="FormatException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private Robot ParseRobot(string positionString, string instructionString)
         {
             // Parse and validate starting position

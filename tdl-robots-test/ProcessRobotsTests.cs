@@ -24,6 +24,14 @@ namespace tdl_robots_test
 
         }
 
+        /// <summary>
+        /// Tests the ProcessRobots class with valid input and checks if the output matches the expected result.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="direction"></param>
+        /// <param name="instructions"></param>
+        /// <param name="expectedOutput"></param>
         [TestCase(1, 1, 1, "RFRFRFRF", "1 1 E")]
         [TestCase(3, 2, 0, "FRRFLLFFRRFLL", "3 3 N LOST")]
         [TestCase(0, 3, 3, "LLFFFLFLFL", "3 3 N LOST")]
@@ -42,6 +50,9 @@ namespace tdl_robots_test
             Assert.That(result[0], Is.EqualTo(expectedOutput));
         }
 
+        /// <summary>
+        /// Tests the ProcessRobots class with a lost robot and checks that the next robot is not lost at the same square.
+        /// </summary>
         [Test]
         public void Given_LostRobot_ProcessRobots_Returns_RobotNotLostAtSameSquare()
         {
@@ -60,6 +71,9 @@ namespace tdl_robots_test
             Assert.That(result[1], Is.EqualTo("2 3 S"));
         }
 
+        /// <summary>
+        /// Tests that an exception is thrown when an invalid instruction character is provided for a robot.
+        /// </summary>
         [Test]
         public void Given_InvalidInstruction_ProcessRobots_Throws_Exception()
         {
